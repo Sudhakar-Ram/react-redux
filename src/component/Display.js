@@ -1,14 +1,15 @@
 import React from 'react';
-import { connect } from "react-redux";
+import {useSelector, useDispatch} from "react-redux";
+import {COUNTER_RESET} from '../redux/store';
 
-function Display(props){
+function Display(){
+    const counter = useSelector(state => state.count);
+    const dispatch = useDispatch();
     return(
         <div>
-            <h3>Increased/Decreased Count : {props.count}</h3>
+            <h3>Increased/Decreased Count : {counter}</h3>
+            <button onClick={() => dispatch({ type: COUNTER_RESET })}>Reset Count</button>
         </div>
     );
 }
-const mapStateToProps = (state) => ({
-    count: state.count
-});
-export default connect(mapStateToProps, null)(Display);
+export default Display;
